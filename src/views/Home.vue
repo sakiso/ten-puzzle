@@ -6,22 +6,22 @@
           <div>
             <v-btn
               @click="selectNumber(number1)"
-              :disabled="selectCompleteFlg"
+              :disabled="selectNumberCompleteFlg"
               >{{ number1 }}</v-btn
             >
             <v-btn
               @click="selectNumber(number2)"
-              :disabled="selectCompleteFlg"
+              :disabled="selectNumberCompleteFlg"
               >{{ number2 }}</v-btn
             >
             <v-btn
               @click="selectNumber(number3)"
-              :disabled="selectCompleteFlg"
+              :disabled="selectNumberCompleteFlg"
               >{{ number3 }}</v-btn
             >
             <v-btn
               @click="selectNumber(number4)"
-              :disabled="selectCompleteFlg"
+              :disabled="selectNumberCompleteFlg"
               >{{ number4 }}</v-btn
             >
           </div>
@@ -30,10 +30,26 @@
       <v-row>
         <v-col>
           <div>
-            <v-btn>+</v-btn>
-            <v-btn>-</v-btn>
-            <v-btn>×</v-btn>
-            <v-btn>÷</v-btn>
+            <v-btn
+              @click="selectSymbol('+')"
+              :disabled="selectSymbolCompleteFlg"
+              >+</v-btn
+            >
+            <v-btn
+              @click="selectSymbol('-')"
+              :disabled="selectSymbolCompleteFlg"
+              >-</v-btn
+            >
+            <v-btn
+              @click="selectSymbol('×')"
+              :disabled="selectSymbolCompleteFlg"
+              >×</v-btn
+            >
+            <v-btn
+              @click="selectSymbol('÷')"
+              :disabled="selectSymbolCompleteFlg"
+              >÷</v-btn
+            >
           </div>
         </v-col>
       </v-row>
@@ -41,6 +57,9 @@
         <v-col>
           <div>
             {{ selectedNumber }}
+          </div>
+          <div>
+            {{ selectedSymbol }}
           </div>
         </v-col>
       </v-row>
@@ -73,8 +92,11 @@ export default {
       number3: 0,
       number4: 0,
       selectedNumber: [],
+      selectedSymbol: [],
       selectNumberCounter: 0,
-      selectCompleteFlg: false,
+      selectSymbolCounter: 0,
+      selectNumberCompleteFlg: false,
+      selectSymbolCompleteFlg: false,
     };
   },
 
@@ -86,7 +108,11 @@ export default {
   methods: {
     deleteSelectedNumbers() {
       this.selectedNumber = [];
-      this.selectCompleteFlg = false;
+      this.selectNumberCompleteFlg = false;
+      this.selectedSymbol = [];
+      this.selectSymbolCompleteFlg = false;
+      this.selectNumberCounter = 0;
+      this.selectSymbolCounter = 0;
     },
     setNumbers() {
       //4つの異なる乱数(1~9までの整数）を生成する
@@ -109,13 +135,21 @@ export default {
         this.number4 === this.number1
       );
     },
+    selectSymbol(symbol) {
+      this.selectedSymbol.push(symbol);
+      //4つ選んだらselectSymbolCompleteFlgを立てて完了扱いにする
+      this.selectSymbolCounter += 1;
+      if (this.selectSymbolCounter === 4) {
+        this.selectSymbolCompleteFlg = true;
+      }
+    },
 
     selectNumber(num) {
       this.selectedNumber.push(num);
-      //4つ選んだらselectCompleteFlgを立てて完了扱いにする
+      //4つ選んだらselectNumberCompleteFlgを立てて完了扱いにする
       this.selectNumberCounter += 1;
       if (this.selectNumberCounter === 4) {
-        this.selectCompleteFlg = true;
+        this.selectNumberCompleteFlg = true;
       }
     },
   },
