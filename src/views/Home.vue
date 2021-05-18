@@ -75,14 +75,7 @@
             {{ selectedNumber }}
           </div>
           <div>
-            {{ selectedSymbol }}
-            {{ nowSelectNumberOrSymbol }}
-          </div>
-          <div>
-            {{ selectedNumber[0] }}
-            {{ selectedNumber[1] }}
-            {{ selectedNumber[2] }}
-            {{ selectedNumber[3] }}
+            {{ displayNumber }}
           </div>
         </v-col>
       </v-row>
@@ -127,6 +120,13 @@ export default {
   created: function () {
     //4つの異なる乱数(1~9までの整数）を生成する
     this.setNumbers();
+  },
+
+  computed: {
+    //数字・計算記号リストから表示用の数式文字列を生成する
+    displayNumber:function() {
+      return this.selectedNumber
+    },
   },
 
   methods: {
