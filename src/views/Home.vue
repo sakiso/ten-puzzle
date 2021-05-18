@@ -125,11 +125,39 @@ export default {
   computed: {
     //数字・計算記号リストから表示用の数式文字列を生成する
     displayNumber: function () {
+      //今いくつ数字が選択されているかで表示すべき数式が変わるのでifで分岐
+      //1つめのとき
       if (this.selectNumberCounter === 1) {
-        const wk = this.selectedNumber[0];
-        return wk.number;
+        const wk1 = this.selectedNumber[0];
+        return String(wk1.number);
+      }
+      //2つめのとき
+      else if (this.selectNumberCounter === 2) {
+        const wk1 = this.selectedNumber[0];
+        const wk2 = this.selectedNumber[1];
+        return String(wk1.number) + String(wk2.number);
+      }
+      //3つめのとき
+      else if (this.selectNumberCounter === 3) {
+        const wk1 = this.selectedNumber[0];
+        const wk2 = this.selectedNumber[1];
+        const wk3 = this.selectedNumber[2];
+        return String(wk1.number) + String(wk2.number) + String(wk3.number);
+      }
+      //4つめのとき
+      else if (this.selectNumberCounter === 4) {
+        const wk1 = this.selectedNumber[0];
+        const wk2 = this.selectedNumber[1];
+        const wk3 = this.selectedNumber[2];
+        const wk4 = this.selectedNumber[3];
+        return (
+          String(wk1.number) +
+          String(String(wk2.number)) +
+          String(wk3.number) +
+          String(wk4.number)
+        );
       } else {
-        return this.selectedNumber;
+        return null;
       }
     },
   },
