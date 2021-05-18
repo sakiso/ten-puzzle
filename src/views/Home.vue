@@ -124,8 +124,13 @@ export default {
 
   computed: {
     //数字・計算記号リストから表示用の数式文字列を生成する
-    displayNumber:function() {
-      return this.selectedNumber
+    displayNumber: function () {
+      if (this.selectNumberCounter === 1) {
+        const wk = this.selectedNumber[0];
+        return wk.number;
+      } else {
+        return this.selectedNumber;
+      }
     },
   },
 
@@ -180,10 +185,7 @@ export default {
     selectNumber(num, seq) {
       //選ばれたのが何番目かをカウントする
       this.selectNumberCounter += 1;
-      this.selectedNumber.push([
-        { seq: this.selectNumberCounter },
-        { number: num },
-      ]);
+      this.selectedNumber.push({ seq: this.selectNumberCounter, number: num });
       //選ばれた記号のボタンを選択済みとして非活性にする
       if (seq === 1) {
         this.numberSelectedFlgs.one = true;
