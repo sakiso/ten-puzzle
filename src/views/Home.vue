@@ -115,12 +115,7 @@ export default {
       number3: 0,
       number4: 0,
       numberSelectedFlgs: { one: false, two: false, three: false, four: false },
-      selectedNumber: [
-        [{ seq: null }, { number: null }],
-        [{ seq: null }, { number: null }],
-        [{ seq: null }, { number: null }],
-        [{ seq: null }, { number: null }],
-      ],
+      selectedNumber: [],
       selectedSymbol: [],
       selectNumberCounter: 0,
       selectSymbolCounter: 0,
@@ -136,12 +131,7 @@ export default {
 
   methods: {
     deleteSelectedNumbers() {
-      this.selectedNumber = [
-        [{ seq: null }, { number: null }],
-        [{ seq: null }, { number: null }],
-        [{ seq: null }, { number: null }],
-        [{ seq: null }, { number: null }],
-      ];
+      this.selectedNumber = [];
       this.selectNumberCompleteFlg = false;
       this.selectedSymbol = [];
       this.selectSymbolCompleteFlg = false;
@@ -190,10 +180,10 @@ export default {
     selectNumber(num, seq) {
       //選ばれたのが何番目かをカウントする
       this.selectNumberCounter += 1;
-      this.selectedNumber[this.selectNumberCounter - 1] = [
+      this.selectedNumber.push([
         { seq: this.selectNumberCounter },
         { number: num },
-      ];
+      ]);
       //選ばれた記号のボタンを選択済みとして非活性にする
       if (seq === 1) {
         this.numberSelectedFlgs.one = true;
