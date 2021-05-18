@@ -40,22 +40,30 @@
           <div>
             <v-btn
               @click="selectSymbol('+')"
-              :disabled="selectSymbolCompleteFlg"
+              :disabled="
+                selectCompleteFlg || nowSelectNumberOrSymbol !== 'symbol'
+              "
               >+</v-btn
             >
             <v-btn
               @click="selectSymbol('-')"
-              :disabled="selectSymbolCompleteFlg"
+              :disabled="
+                selectCompleteFlg || nowSelectNumberOrSymbol !== 'symbol'
+              "
               >-</v-btn
             >
             <v-btn
               @click="selectSymbol('×')"
-              :disabled="selectSymbolCompleteFlg"
+              :disabled="
+                selectCompleteFlg || nowSelectNumberOrSymbol !== 'symbol'
+              "
               >×</v-btn
             >
             <v-btn
               @click="selectSymbol('÷')"
-              :disabled="selectSymbolCompleteFlg"
+              :disabled="
+                selectCompleteFlg || nowSelectNumberOrSymbol !== 'symbol'
+              "
               >÷</v-btn
             >
           </div>
@@ -69,6 +77,12 @@
           <div>
             {{ selectedSymbol }}
             {{ nowSelectNumberOrSymbol }}
+          </div>
+          <div>
+            {{ selectedNumber[0] }}
+            {{ selectedNumber[1] }}
+            {{ selectedNumber[2] }}
+            {{ selectedNumber[3] }}
           </div>
         </v-col>
       </v-row>
@@ -101,12 +115,16 @@ export default {
       number3: 0,
       number4: 0,
       numberSelectedFlgs: { one: false, two: false, three: false, four: false },
-      selectedNumber: [],
+      selectedNumber: [
+        [{ seq: null }, { number: null }],
+        [{ seq: null }, { number: null }],
+        [{ seq: null }, { number: null }],
+        [{ seq: null }, { number: null }],
+      ],
       selectedSymbol: [],
       selectNumberCounter: 0,
       selectSymbolCounter: 0,
-      selectNumberCompleteFlg: false,
-      selectSymbolCompleteFlg: false,
+      selectCompleteFlg: false,
       nowSelectNumberOrSymbol: 'number',
     };
   },
@@ -118,7 +136,12 @@ export default {
 
   methods: {
     deleteSelectedNumbers() {
-      this.selectedNumber = [];
+      this.selectedNumber = [
+        [{ seq: null }, { number: null }],
+        [{ seq: null }, { number: null }],
+        [{ seq: null }, { number: null }],
+        [{ seq: null }, { number: null }],
+      ];
       this.selectNumberCompleteFlg = false;
       this.selectedSymbol = [];
       this.selectSymbolCompleteFlg = false;
@@ -160,10 +183,6 @@ export default {
         { seq: this.selectSymbolCounter },
         { number: symbol }
       );
-      //4つ選んだらselectNumberCompleteFlgを立てて完了扱いにする
-      if (this.selectSymbolCounter === 4) {
-        this.selectSymbolCompleteFlg = true;
-      }
       //次は数字を選ぶ
       this.nowSelectNumberOrSymbol = 'number';
     },
@@ -171,10 +190,10 @@ export default {
     selectNumber(num, seq) {
       //選ばれたのが何番目かをカウントする
       this.selectNumberCounter += 1;
-      this.selectedNumber.push(
+      this.selectedNumber[this.selectNumberCounter - 1] = [
         { seq: this.selectNumberCounter },
-        { number: num }
-      );
+        { number: num },
+      ];
       //選ばれた記号のボタンを選択済みとして非活性にする
       if (seq === 1) {
         this.numberSelectedFlgs.one = true;
@@ -188,7 +207,7 @@ export default {
 
       //4つ選んだらselectNumberCompleteFlgを立てて完了扱いにする
       if (this.selectNumberCounter === 4) {
-        this.selectNumberCompleteFlg = true;
+        this.selectCompleteFlg = true;
       }
       //次は記号を選ぶ
       this.nowSelectNumberOrSymbol = 'symbol';
