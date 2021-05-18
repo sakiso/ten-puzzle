@@ -174,10 +174,10 @@ export default {
     selectSymbol(symbol) {
       //選ばれたのが何番目かをカウントする
       this.selectSymbolCounter += 1;
-      this.selectedSymbol.push(
-        { seq: this.selectSymbolCounter },
-        { number: symbol }
-      );
+      this.selectedSymbol.push({
+        seq: this.selectSymbolCounter,
+        number: symbol,
+      });
       //次は数字を選ぶ
       this.nowSelectNumberOrSymbol = 'number';
     },
