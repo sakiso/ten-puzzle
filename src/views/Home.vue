@@ -135,14 +135,24 @@ export default {
       else if (this.selectNumberCounter === 2) {
         const wk1 = this.selectedNumber[0];
         const wk2 = this.selectedNumber[1];
-        return String(wk1.number) + String(wk2.number);
+        return (
+          String(wk1.number) +
+          this.selectedSymbol[0].symbol +
+          String(wk2.number)
+        );
       }
       //3つめのとき
       else if (this.selectNumberCounter === 3) {
         const wk1 = this.selectedNumber[0];
         const wk2 = this.selectedNumber[1];
         const wk3 = this.selectedNumber[2];
-        return String(wk1.number) + String(wk2.number) + String(wk3.number);
+        return (
+          String(wk1.number) +
+          this.selectedSymbol[0].symbol +
+          String(wk2.number) +
+          this.selectedSymbol[1].symbol +
+          String(wk3.number)
+        );
       }
       //4つめのとき
       else if (this.selectNumberCounter === 4) {
@@ -152,8 +162,11 @@ export default {
         const wk4 = this.selectedNumber[3];
         return (
           String(wk1.number) +
-          String(String(wk2.number)) +
+          this.selectedSymbol[0].symbol +
+          String(wk2.number) +
+          this.selectedSymbol[1].symbol +
           String(wk3.number) +
+          this.selectedSymbol[2].symbol +
           String(wk4.number)
         );
       } else {
@@ -201,9 +214,10 @@ export default {
     selectSymbol(symbol) {
       //選ばれたのが何番目かをカウントする
       this.selectSymbolCounter += 1;
+      //選択された記号を配列に入れる
       this.selectedSymbol.push({
         seq: this.selectSymbolCounter,
-        number: symbol,
+        symbol: symbol,
       });
       //次は数字を選ぶ
       this.nowSelectNumberOrSymbol = 'number';
@@ -212,6 +226,7 @@ export default {
     selectNumber(num, seq) {
       //選ばれたのが何番目かをカウントする
       this.selectNumberCounter += 1;
+      //選択された数字を配列に入れる
       this.selectedNumber.push({ seq: this.selectNumberCounter, number: num });
       //選ばれた記号のボタンを選択済みとして非活性にする
       if (seq === 1) {
