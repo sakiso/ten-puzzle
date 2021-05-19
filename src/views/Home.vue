@@ -72,20 +72,15 @@
       <v-row>
         <v-col>
           <div>
-           <v-btn>
-             (
-           </v-btn>
-           <v-btn>
-             )
-           </v-btn>
-           
+            <v-btn> ( </v-btn>
+            <v-btn> ) </v-btn>
           </div>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
           <div>
-            {{ displayNumber }}
+            {{ displayFormula }}
           </div>
         </v-col>
       </v-row>
@@ -120,6 +115,7 @@ export default {
       numberSelectedFlgs: { one: false, two: false, three: false, four: false },
       selectedNumber: [],
       selectedSymbol: [],
+      displayFormula: [],
       selectNumberCounter: 0,
       selectSymbolCounter: 0,
       selectCompleteFlg: false,
@@ -132,7 +128,7 @@ export default {
     this.setNumbers();
   },
 
-  computed: {
+  /*  computed: {
     //数字・計算記号リストから表示用の数式文字列を生成する
     displayNumber: function () {
       //今いくつ数字が選択されているかで表示すべき数式が変わるのでifで分岐
@@ -209,6 +205,7 @@ export default {
       }
     },
   },
+  */
 
   methods: {
     deleteSelectedNumbers() {
@@ -250,6 +247,8 @@ export default {
       //選ばれたのが何番目かをカウントする
       this.selectSymbolCounter += 1;
       //選択された記号を配列に入れる
+      this.displayFormula.push(symbol);
+      //選択された記号を配列に入れる
       this.selectedSymbol.push({
         seq: this.selectSymbolCounter,
         symbol: symbol,
@@ -262,7 +261,7 @@ export default {
       //選ばれたのが何番目かをカウントする
       this.selectNumberCounter += 1;
       //選択された数字を配列に入れる
-      this.selectedNumber.push({ seq: this.selectNumberCounter, number: num });
+      this.displayFormula.push(num);
       //選ばれた記号のボタンを選択済みとして非活性にする
       if (seq === 1) {
         this.numberSelectedFlgs.one = true;
