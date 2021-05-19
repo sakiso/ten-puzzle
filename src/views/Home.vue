@@ -72,9 +72,6 @@
       <v-row>
         <v-col>
           <div>
-            {{ selectedNumber }}
-          </div>
-          <div>
             {{ displayNumber }}
           </div>
         </v-col>
@@ -129,12 +126,26 @@ export default {
       //1つめのとき
       if (this.selectNumberCounter === 1) {
         const wk1 = this.selectedNumber[0];
+        //1つめ＋記号1つ目のとき
+        if (this.selectSymbolCounter === 1) {
+          return String(wk1.number) + this.selectedSymbol[0].symbol;
+        }
         return String(wk1.number);
       }
+
       //2つめのとき
       else if (this.selectNumberCounter === 2) {
         const wk1 = this.selectedNumber[0];
         const wk2 = this.selectedNumber[1];
+        //2つめ＋記号2つ目のとき
+        if (this.selectSymbolCounter === 2) {
+          return (
+            String(wk1.number) +
+            this.selectedSymbol[0].symbol +
+            String(wk2.number) +
+            this.selectedSymbol[1].symbol
+          );
+        }
         return (
           String(wk1.number) +
           this.selectedSymbol[0].symbol +
@@ -146,6 +157,17 @@ export default {
         const wk1 = this.selectedNumber[0];
         const wk2 = this.selectedNumber[1];
         const wk3 = this.selectedNumber[2];
+        //3つめ＋記号3つ目のとき
+        if (this.selectSymbolCounter === 3) {
+          return (
+            String(wk1.number) +
+            this.selectedSymbol[0].symbol +
+            String(wk2.number) +
+            this.selectedSymbol[1].symbol +
+            String(wk3.number) +
+            this.selectedSymbol[2].symbol
+          );
+        }
         return (
           String(wk1.number) +
           this.selectedSymbol[0].symbol +
