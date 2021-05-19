@@ -72,6 +72,19 @@
       <v-row>
         <v-col>
           <div>
+           <v-btn>
+             (
+           </v-btn>
+           <v-btn>
+             )
+           </v-btn>
+           
+          </div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <div>
             {{ displayNumber }}
           </div>
         </v-col>
