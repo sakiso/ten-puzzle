@@ -165,9 +165,8 @@ export default {
   methods: {
     deleteSelectedNumbers() {
       this.selectedNumber = [];
-      this.selectNumberCompleteFlg = false;
       this.selectedSymbol = [];
-      this.selectSymbolCompleteFlg = false;
+      this.selectCompleteFlg = false;
       this.selectNumberCounter = 0;
       this.selectSymbolCounter = 0;
       this.nowSelectNumberOrSymbol = 'number';
