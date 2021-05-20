@@ -72,16 +72,16 @@
       <v-row>
         <v-col>
           <div>
-            <v-btn> ( </v-btn>
-            <v-btn> ) </v-btn>
+            <v-btn @click="selectParentheses('(')"> ( </v-btn>
+            <v-btn @click="selectParentheses(')')"> ) </v-btn>
           </div>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <div>
-            {{ displayFormula }}
-          </div>
+          <span v-for="item in displayFormula" :key="item.id">
+            {{ item }}
+          </span>
         </v-col>
       </v-row>
       <v-row>
@@ -215,6 +215,7 @@ export default {
       this.selectNumberCounter = 0;
       this.selectSymbolCounter = 0;
       this.nowSelectNumberOrSymbol = 'number';
+      this.displayFormula = [];
       this.numberSelectedFlgs = {
         one: false,
         two: false,
@@ -255,6 +256,11 @@ export default {
       });
       //次は数字を選ぶ
       this.nowSelectNumberOrSymbol = 'number';
+    },
+
+    selectParentheses(parentheses) {
+      //選択された記号を配列に入れる
+      this.displayFormula.push(parentheses);
     },
 
     selectNumber(num, seq) {
