@@ -89,11 +89,19 @@
           <div>
             <v-btn
               @click="
+                deleteSelectedNumbers();
+              "
+              >clear
+            </v-btn>
+            </div>
+            <div>
+            <v-btn
+              @click="
                 setNumbers();
                 deleteSelectedNumbers();
               "
-              >reload</v-btn
-            >
+              >reload
+            </v-btn>
           </div>
         </v-col>
       </v-row>
@@ -127,85 +135,6 @@ export default {
     //4つの異なる乱数(1~9までの整数）を生成する
     this.setNumbers();
   },
-
-  /*  computed: {
-    //数字・計算記号リストから表示用の数式文字列を生成する
-    displayNumber: function () {
-      //今いくつ数字が選択されているかで表示すべき数式が変わるのでifで分岐
-      //1つめのとき
-      if (this.selectNumberCounter === 1) {
-        const wk1 = this.selectedNumber[0];
-        //1つめ＋記号1つ目のとき
-        if (this.selectSymbolCounter === 1) {
-          return String(wk1.number) + this.selectedSymbol[0].symbol;
-        }
-        return String(wk1.number);
-      }
-
-      //2つめのとき
-      else if (this.selectNumberCounter === 2) {
-        const wk1 = this.selectedNumber[0];
-        const wk2 = this.selectedNumber[1];
-        //2つめ＋記号2つ目のとき
-        if (this.selectSymbolCounter === 2) {
-          return (
-            String(wk1.number) +
-            this.selectedSymbol[0].symbol +
-            String(wk2.number) +
-            this.selectedSymbol[1].symbol
-          );
-        }
-        return (
-          String(wk1.number) +
-          this.selectedSymbol[0].symbol +
-          String(wk2.number)
-        );
-      }
-      //3つめのとき
-      else if (this.selectNumberCounter === 3) {
-        const wk1 = this.selectedNumber[0];
-        const wk2 = this.selectedNumber[1];
-        const wk3 = this.selectedNumber[2];
-        //3つめ＋記号3つ目のとき
-        if (this.selectSymbolCounter === 3) {
-          return (
-            String(wk1.number) +
-            this.selectedSymbol[0].symbol +
-            String(wk2.number) +
-            this.selectedSymbol[1].symbol +
-            String(wk3.number) +
-            this.selectedSymbol[2].symbol
-          );
-        }
-        return (
-          String(wk1.number) +
-          this.selectedSymbol[0].symbol +
-          String(wk2.number) +
-          this.selectedSymbol[1].symbol +
-          String(wk3.number)
-        );
-      }
-      //4つめのとき
-      else if (this.selectNumberCounter === 4) {
-        const wk1 = this.selectedNumber[0];
-        const wk2 = this.selectedNumber[1];
-        const wk3 = this.selectedNumber[2];
-        const wk4 = this.selectedNumber[3];
-        return (
-          String(wk1.number) +
-          this.selectedSymbol[0].symbol +
-          String(wk2.number) +
-          this.selectedSymbol[1].symbol +
-          String(wk3.number) +
-          this.selectedSymbol[2].symbol +
-          String(wk4.number)
-        );
-      } else {
-        return null;
-      }
-    },
-  },
-  */
 
   methods: {
     deleteSelectedNumbers() {
