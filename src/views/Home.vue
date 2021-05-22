@@ -86,15 +86,18 @@
       </v-row>
       <v-row>
         <v-col>
+          {{ result }}
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
           <div>
-            <v-btn
-              @click="
-                deleteSelectedNumbers();
-              "
-              >clear
-            </v-btn>
-            </div>
-            <div>
+            <v-btn @click="calculate()">calculate </v-btn>
+          </div>
+          <div>
+            <v-btn @click="deleteSelectedNumbers()">clear </v-btn>
+          </div>
+          <div>
             <v-btn
               @click="
                 setNumbers();
@@ -128,6 +131,7 @@ export default {
       selectSymbolCounter: 0,
       selectCompleteFlg: false,
       nowSelectNumberOrSymbol: 'number',
+      result: null,
     };
   },
 
@@ -137,6 +141,20 @@ export default {
   },
 
   methods: {
+    calculate() {
+      const wk = this.displayFormula.map((el) => {
+        if (el === '×') {
+          return '*';
+        } else if (el === '÷') {
+          return '/';
+        } else {
+          return el;
+        }
+      });
+      const calcFormula = wk.join(''); //配列を結合して文字列に
+      this.result = Function('return(' + calcFormula + ')')(); //文字列を数式として実行
+    },
+
     deleteSelectedNumbers() {
       this.selectedNumber = [];
       this.selectedSymbol = [];
@@ -151,6 +169,7 @@ export default {
         three: false,
         four: false,
       };
+      this.result = null
     },
     setNumbers() {
       //4つの異なる乱数(1~9までの整数）を生成する
