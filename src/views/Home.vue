@@ -102,6 +102,7 @@
               @click="
                 setNumbers();
                 deleteSelectedNumbers();
+                stopTimer();
               "
               >reload
             </v-btn>
@@ -132,15 +133,31 @@ export default {
       selectCompleteFlg: false,
       nowSelectNumberOrSymbol: 'number',
       result: null,
+      elapsedTime: 0,
     };
   },
 
   created: function () {
     //4つの異なる乱数(1~9までの整数）を生成する
     this.setNumbers();
+    //タイマー起動
+//    this.startTimer();
   },
 
   methods: {
+    timer() {
+      this.elapsedTime += 1;
+      console.log(this.elapsedTime);
+    },
+    startTimer() {
+      setInterval(this.timer, 2000);
+    },
+
+    stopTimer() {
+      clearInterval(this.startTimer);
+      console.log('stop');
+    },
+
     calculate() {
       const wk = this.displayFormula.map((el) => {
         if (el === '×') {
@@ -169,7 +186,7 @@ export default {
         three: false,
         four: false,
       };
-      this.result = null
+      this.result = null;
     },
     setNumbers() {
       //4つの異なる乱数(1~9までの整数）を生成する
