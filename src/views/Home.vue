@@ -119,6 +119,9 @@
 </template>
 
 <script>
+//小数点計算のためのライブラリimport
+import { Decimal } from 'decimal.js';
+
 export default {
   name: 'Home',
 
