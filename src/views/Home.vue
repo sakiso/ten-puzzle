@@ -83,11 +83,17 @@
             {{ item }}
           </span>
         </v-col>
-      </v-row>
-      <v-row>
         <v-col>
           {{ result }}
         </v-col>
+      </v-row>
+      <v-row>
+      </v-row>
+      <v-row v-if="correctAnswerFlg">
+        <v-col> おめでとうございます！！ </v-col>
+      </v-row>
+      <v-row v-if="correctAnswerFlg">
+        <v-col> 記録: {{ elapsedTimeDevidedByTen }}秒 </v-col>
       </v-row>
       <v-row>
         <v-col> {{ elapsedTimeDevidedByTen }} 秒経過 </v-col>
@@ -100,13 +106,13 @@
             </v-btn>
           </div>
           <div>
-            <v-btn @click="deleteSelectedNumbers()">clear </v-btn>
+            <v-btn @click="clearData()">clear </v-btn>
           </div>
           <div>
             <v-btn
               @click="
                 setNumbers();
-                deleteSelectedNumbers();
+                clearData();
                 reStartTimer();
               "
               >reload
@@ -139,6 +145,7 @@ export default {
       selectNumberCounter: 0,
       selectSymbolCounter: 0,
       selectCompleteFlg: false,
+      correctAnswerFlg: false,
       nowSelectNumberOrSymbol: 'number',
       result: null,
       elapsedTime: 0,
@@ -168,9 +175,12 @@ export default {
     startTimer() {
       this.intarvalId = setInterval(this.timer, 100);
     },
+    stopTimer() {
+      clearInterval(this.intarvalId);
+    },
 
     reStartTimer() {
-      clearInterval(this.intarvalId);
+      this.stopTimer();
       this.elapsedTime = 0;
       this.startTimer();
     },
@@ -187,9 +197,15 @@ export default {
       });
       const calcFormula = wk.join(''); //配列を結合して文字列に
       this.result = Function('return(' + calcFormula + ')')(); //文字列を数式として実行
+
+      if (this.result === 10) {
+        //結果が10だったらカウンターを止めて正解メッセージを表示
+        this.correctAnswerFlg = true;
+        this.stopTimer();
+      }
     },
 
-    deleteSelectedNumbers() {
+    clearData() {
       this.selectedNumber = [];
       this.selectedSymbol = [];
       this.selectCompleteFlg = false;
@@ -203,6 +219,7 @@ export default {
         three: false,
         four: false,
       };
+      this.correctAnswerFlg= false,
       this.result = null;
     },
     setNumbers() {
