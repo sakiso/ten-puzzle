@@ -91,6 +91,11 @@
       </v-row>
       <v-row>
         <v-col>
+          {{ elapsedTimeDevidedByTen }}
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
           <div>
             <v-btn @click="calculate()">calculate </v-btn>
           </div>
@@ -102,7 +107,7 @@
               @click="
                 setNumbers();
                 deleteSelectedNumbers();
-                stopTimer();
+                reStartTimer();
               "
               >reload
             </v-btn>
@@ -145,18 +150,26 @@ export default {
     this.startTimer();
   },
 
+  computed: {
+    elapsedTimeDevidedByTen: function () {
+      return this.elapsedTime / 10;
+    },
+  },
+
   methods: {
     timer() {
       this.elapsedTime += 1;
       console.log(this.elapsedTime);
     },
     startTimer() {
-      this.intarvalId = setInterval(this.timer, 2000);
+      this.intarvalId = setInterval(this.timer, 100);
+      console.log(this.intarvalId);
     },
 
-    stopTimer() {
+    reStartTimer() {
       clearInterval(this.intarvalId);
-      console.log('stop');
+      this.elapsedTime = 0;
+      this.startTimer();
     },
 
     calculate() {
