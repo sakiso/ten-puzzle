@@ -164,11 +164,9 @@ export default {
   methods: {
     timer() {
       this.elapsedTime += 1;
-      console.log(this.elapsedTime);
     },
     startTimer() {
       this.intarvalId = setInterval(this.timer, 100);
-      console.log(this.intarvalId);
     },
 
     reStartTimer() {
