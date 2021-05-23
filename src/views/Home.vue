@@ -90,14 +90,14 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col>
-          {{ elapsedTimeDevidedByTen }} 秒経過
-        </v-col>
+        <v-col> {{ elapsedTimeDevidedByTen }} 秒経過 </v-col>
       </v-row>
       <v-row>
         <v-col>
           <div>
-            <v-btn @click="calculate()">calculate </v-btn>
+            <v-btn @click="calculate()" :disabled="!selectCompleteFlg"
+              >calculate
+            </v-btn>
           </div>
           <div>
             <v-btn @click="deleteSelectedNumbers()">clear </v-btn>
