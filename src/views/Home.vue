@@ -91,7 +91,7 @@
       </v-row>
       <v-row>
         <v-col>
-          {{ elapsedTimeDevidedByTen }}
+          {{ elapsedTimeDevidedByTen }} 秒経過
         </v-col>
       </v-row>
       <v-row>
@@ -155,7 +155,9 @@ export default {
 
   computed: {
     elapsedTimeDevidedByTen: function () {
-      return this.elapsedTime / 10;
+      //丸め誤差対策のためdecimal.jsで除算、かつ
+      //toFixedで小数点1まで常に表示（小数点以下がゼロでも）
+      return Decimal(this.elapsedTime).div(10).toFixed(1);
     },
   },
 
