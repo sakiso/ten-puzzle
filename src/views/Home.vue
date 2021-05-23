@@ -134,6 +134,7 @@ export default {
       nowSelectNumberOrSymbol: 'number',
       result: null,
       elapsedTime: 0,
+      intarvalId: null,
     };
   },
 
@@ -141,7 +142,7 @@ export default {
     //4つの異なる乱数(1~9までの整数）を生成する
     this.setNumbers();
     //タイマー起動
-//    this.startTimer();
+    this.startTimer();
   },
 
   methods: {
@@ -150,11 +151,11 @@ export default {
       console.log(this.elapsedTime);
     },
     startTimer() {
-      setInterval(this.timer, 2000);
+      this.intarvalId = setInterval(this.timer, 2000);
     },
 
     stopTimer() {
-      clearInterval(this.startTimer);
+      clearInterval(this.intarvalId);
       console.log('stop');
     },
 
